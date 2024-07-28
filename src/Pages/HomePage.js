@@ -1,6 +1,28 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeDifficulty } from '../app/states/difficultySlice'
 
 export default function HomePage() {
+
+    const difficulty = useSelector((state) => state.difficulty.value)
+    const dispatch = useDispatch()
+
+
+    // console.log(difficulty.value);
+
+
+    const getClasses = (id) => {
+        const baseClasses = 'my-1 mx-1 grow p-4 border-2'
+        const hoverClasses = 'hover:border-black hover:cursor-pointer hover:shadow-md hover:shadow-current'
+        const activeClasses = 'border-black cursor-pointer shadow-md shadow-current'
+
+        if (difficulty === null)
+            return `${baseClasses} border-b-gray-700/25 ${hoverClasses}`
+
+        return difficulty === id ? `${baseClasses} ${activeClasses}` : `${baseClasses} border-b-gray-700/25 ${hoverClasses}`
+    }
+
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-[##0EA5E9]">
             <div className="bg-white shadow-lg p-6 md:w-3/4 md:h-1/2 w-4/5 h-4/5 text-center">
@@ -12,9 +34,9 @@ export default function HomePage() {
                         <div className='font-serif text-sky-500 font-normal my-1'>Gives you a random sudoku game to solve. Cut your coat according to you size, choose your desired difficulty level below</div>
                         {/* Buttons for easy medium and hard */}
                         <div className='flex flex-col md:flex-row items-stretch justify-between'>{/* Flex box for the buttons */}
-                            <div className='my-1 mx-1 grow p-4 border-2 border-b-gray-700/25 hover:border-black hover:cursor-pointer shadow-md hover:shadow-md hover:shadow-current'>Easy</div>
-                            <div className='my-1 mx-1 grow p-4 border-2 border-b-gray-700/25 hover:border-black hover:cursor-pointer shadow-md hover:shadow-md hover:shadow-current'>Medium</div>
-                            <div className='my-1 mx-1 grow p-4 border-2 border-b-gray-700/25 hover:border-black hover:cursor-pointer shadow-md hover:shadow-md hover:shadow-current'>Hard</div>
+                            <div id='easy' className={getClasses('easy')} onClick={() => dispatch(changeDifficulty("easy"))}>Easy</div>
+                            <div id='medium' className={getClasses('medium')} onClick={() => dispatch(changeDifficulty("medium"))}>Medium</div>
+                            <div id='hard' className={getClasses('hard')} onClick={() => dispatch(changeDifficulty("hard"))}>Hard</div>
                         </div>
                         <div className='font-serif cursor-pointer my-2 border-2 text-blue-950 hover:border-2 hover:border-blue-400 p-3 bg-[#0EA5E9] shadow-md hover:shadow-md hover:shadow-black'>
                             PLAY
