@@ -4,10 +4,12 @@ import { gameSliceActions } from '../app/Game'
 import { useNavigate } from 'react-router-dom'
 
 export default function HomePage() {
+    const dispatch = useDispatch()
+    dispatch(gameSliceActions.resetGame())
 
     // const difficulty = useSelector(state => state.difficulty)
     // console.log(difficulty);
-    const dispatch = useDispatch()
+
     const navigate = useNavigate()
 
 
@@ -38,6 +40,8 @@ export default function HomePage() {
         dispatch(gameSliceActions.createGame({ difficulty: difficultyTemp }))
         navigate('/game')
     }
+
+
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-[##0EA5E9]">

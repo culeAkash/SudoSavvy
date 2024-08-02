@@ -2,9 +2,11 @@ import React from "react";
 import HomePage from "./Pages/HomePage";
 import Game from "./Pages/Game";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 function App() {
+  // const {difficulty} = useSelector(state=>state)
   return (
     <React.Fragment>
       <BrowserRouter>
